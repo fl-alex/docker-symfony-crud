@@ -12,5 +12,6 @@ class DefaultController extends AbstractController
     public function list(): Response
     {
         return new Response('Welcome to Latte and Code++----+ ');
+        //test2
     }
 }

@@ -11,6 +11,6 @@ class DefaultController extends AbstractController
     #[Route(path: '/', name: 'articles', methods: ['GET'])]
     public function list(): Response
     {
-        return new Response('Welcome to Latte and Code++----+ ');
+        return new Response('Welcome to Latte and Code TEST BRANCH');
     }
 }

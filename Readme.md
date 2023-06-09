@@ -1,4 +1,4 @@
-# 🐳 Docker + PHP 8.2 + MySQL + Nginx + Symfony 6.2 Boilerplate
+# 🐳 Docker + PHP 8.2 + MySQL + Nginx + Symfony 6.2 Boilerplate + Auth
 
 ## Description
 

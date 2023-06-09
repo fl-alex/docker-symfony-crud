@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a complete stack for running Symfony 6.2 into Docker containers using docker-compose tool.
+This is a complete stack for running Symfony 6.2 into Docker containers using docker-compose tool + Auth
 
 It is composed by 4 containers:
 

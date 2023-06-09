@@ -9,6 +9,7 @@ It is composed by 4 containers:
 - `nginx`, acting as the webserver.
 - `php`, the PHP-FPM container with the 8.2 version of PHP.
 - `db` which is the MySQL database container with a **MySQL 8.0** image.
+- `phpmyadmin`
 
 ## Installation
 

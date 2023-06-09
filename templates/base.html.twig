@@ -5,6 +5,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+
         {% block stylesheets %}
 
         {% endblock %}
@@ -14,11 +15,32 @@
         {% endblock %}
     </head>
     <body>
-      <ol>
-        <li><a href="{{ path('dashboard') }}">Dashboard</a></li>
-        <li></li>
-        <li></li>
-      </ol>
+
+      <div class="row">
+        <a href="{{ path('dashboard') }}">Dashboard</a> |
+        <a href="{{ path('app_file_type_index') }}">FileTypes</a>
+
+        {% if app.user %}
+        <span style="float: right">You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a></span>
+        {% endif %}
+      </div>
+    <hr>
+
+
+
         {% block body %}{% endblock %}
     </body>
+
+<style>
+  table{
+    border-spacing:0;
+  }
+  td{
+    border: 1px solid gray;
+    padding: 2px 5px 2px 5px;
+  }
+    </style>
+
+
+
 </html>

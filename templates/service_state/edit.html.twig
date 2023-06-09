@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ServiceState{% endblock %}
+
+{% block body %}
+    <h1>Edit ServiceState</h1>
+
+    {{ include('service_state/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_service_state_index') }}">back to list</a>
+
+    {{ include('service_state/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ServiceState{% endblock %}
+
+{% block body %}
+    <h1>Create new ServiceState</h1>
+
+    {{ include('service_state/_form.html.twig') }}
+
+    <a href="{{ path('app_service_state_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New FileType{% endblock %}
+
+{% block body %}
+    <h1>Create new FileType</h1>
+
+    {{ include('file_type/_form.html.twig') }}
+
+    <a href="{{ path('app_file_type_index') }}">back to list</a>
+{% endblock %}

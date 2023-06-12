@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Objectservice{% endblock %}
+
+{% block body %}
+    <h1>Edit Objectservice</h1>
+
+    {{ include('objectservice/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_objectservice_index') }}">back to list</a>
+
+    {{ include('objectservice/_delete_form.html.twig') }}
+{% endblock %}

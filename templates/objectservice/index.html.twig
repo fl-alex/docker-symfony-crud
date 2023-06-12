@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Objectservice index{% endblock %}
+
+{% block body %}
+    <h1>Objectservice index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Dateplan</th>
+                <th>Datefact</th>
+                <th>Dateend</th>
+                <th>ServiceType</th>
+                <th>ServiceState</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for objectservice in objectservices %}
+            <tr>
+                <td>{{ objectservice.id }}</td>
+                <td>{{ objectservice.name }}</td>
+                <td>{{ objectservice.description }}</td>
+                <td>{{ objectservice.dateplan ? objectservice.dateplan|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ objectservice.datefact ? objectservice.datefact|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ objectservice.dateend ? objectservice.dateend|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ objectservice.getServiceType }}</td>
+                <td>{{ objectservice.getServiceState }}</td>
+
+                <td>
+                    <a href="{{ path('app_objectservice_show', {'id': objectservice.id}) }}">show</a>
+                    <a href="{{ path('app_objectservice_edit', {'id': objectservice.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_objectservice_new') }}">Create new</a>
+{% endblock %}

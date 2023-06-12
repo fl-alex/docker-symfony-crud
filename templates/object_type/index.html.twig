@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ObjectType index{% endblock %}
+
+{% block body %}
+    <h1>ObjectType index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for object_type in object_types %}
+            <tr>
+                <td>{{ object_type.id }}</td>
+                <td>{{ object_type.name }}</td>
+                <td>{{ object_type.description }}</td>
+                <td>
+                    <a href="{{ path('app_object_type_show', {'id': object_type.id}) }}">show</a>
+                    <a href="{{ path('app_object_type_edit', {'id': object_type.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_object_type_new') }}">Create new</a>
+{% endblock %}

@@ -6,6 +6,7 @@ use App\Entity\Equipment;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class EquipmentType extends AbstractType
 {
@@ -14,8 +15,8 @@ class EquipmentType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('datestart')
-            ->add('dateend')
+            ->add('datestart', DateType::class, ['label' => 'Starts On','widget'=>'single_text', 'required'=>true])
+            ->add('dateend', DateType::class, ['label' => 'Starts On','widget'=>'single_text', 'required'=>false])
             ->add('characteristics')
             ->add('ObjectType')
             ->add('location')

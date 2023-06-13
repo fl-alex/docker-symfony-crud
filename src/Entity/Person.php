@@ -27,6 +27,10 @@ class Person
     #[ORM\OneToMany(mappedBy: 'person', targetEntity: Equipment::class)]
     private Collection $equipment;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $User = null;
+
     public function __construct()
     {
         $this->equipment = new ArrayCollection();
@@ -105,5 +109,17 @@ class Person
 
     public function __toString() {
         return $this->name;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(User $User): static
+    {
+        $this->User = $User;
+
+        return $this;
     }
 }

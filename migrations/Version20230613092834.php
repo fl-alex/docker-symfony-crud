@@ -20,7 +20,7 @@ final class Version20230613092834 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE equipment (id INT AUTO_INCREMENT NOT NULL, object_type_id INT NOT NULL, location_id INT NOT NULL, person_id INT NOT NULL, name VARCHAR(255) NOT NULL, description VARCHAR(255) DEFAULT NULL, datestart DATE NOT NULL, dateend DATE DEFAULT NULL, characteristics JSON DEFAULT NULL, INDEX IDX_D338D583C5020C33 (object_type_id), INDEX IDX_D338D58364D218E (location_id), INDEX IDX_D338D583217BBB47 (person_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE equipment (id INT AUTO_INCREMENT NOT NULL, object_type_id INT NOT NULL, location_id INT NOT NULL, person_id INT NOT NULL, name VARCHAR(255) NOT NULL, description VARCHAR(255) DEFAULT NULL, datestart DATE NOT NULL, dateend DATE DEFAULT NULL, characteristics VARCHAR(255) DEFAULT NULL, INDEX IDX_D338D583C5020C33 (object_type_id), INDEX IDX_D338D58364D218E (location_id), INDEX IDX_D338D583217BBB47 (person_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE equipment ADD CONSTRAINT FK_D338D583C5020C33 FOREIGN KEY (object_type_id) REFERENCES object_type (id)');
         $this->addSql('ALTER TABLE equipment ADD CONSTRAINT FK_D338D58364D218E FOREIGN KEY (location_id) REFERENCES location (id)');
         $this->addSql('ALTER TABLE equipment ADD CONSTRAINT FK_D338D583217BBB47 FOREIGN KEY (person_id) REFERENCES person (id)');

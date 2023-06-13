@@ -14,6 +14,7 @@ class FileType extends AbstractType
         $builder
             ->add('name')
             ->add('FileType')
+            ->add('equipment')
         ;
     }
 

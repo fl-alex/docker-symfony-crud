@@ -29,7 +29,7 @@ class Equipment
     private ?\DateTimeInterface $dateend = null;
 
     #[ORM\Column(nullable: true)]
-    private array $characteristics = [];
+    private ?string $characteristics = null;
 
     #[ORM\ManyToOne(inversedBy: 'equipment')]
     #[ORM\JoinColumn(nullable: false)]
@@ -43,7 +43,7 @@ class Equipment
     #[ORM\JoinColumn(nullable: false)]
     private ?Person $person = null;
 
-    #[ORM\OneToMany(mappedBy: 'equipment', targetEntity: File::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'equipment', targetEntity: File::class, orphanRemoval: true, cascade:["persist"])]
     private Collection $file;
 
     #[ORM\OneToMany(mappedBy: 'equipment', targetEntity: Objectservice::class, orphanRemoval: true)]
@@ -108,12 +108,12 @@ class Equipment
         return $this;
     }
 
-    public function getCharacteristics(): array
+    public function getCharacteristics(): ?string
     {
         return $this->characteristics;
     }
 
-    public function setCharacteristics(?array $characteristics): static
+    public function setCharacteristics(?string $characteristics): static
     {
         $this->characteristics = $characteristics;
 
@@ -214,5 +214,9 @@ class Equipment
         }
 
         return $this;
+    }
+
+    public function __toString() {
+        return $this->name;
     }
 }

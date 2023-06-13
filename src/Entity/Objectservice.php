@@ -37,6 +37,10 @@ class Objectservice
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateend = null;
 
+    #[ORM\ManyToOne(inversedBy: 'ObjectService')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Equipment $equipment = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -124,5 +128,21 @@ class Objectservice
         $this->dateend = $dateend;
 
         return $this;
+    }
+
+    public function getEquipment(): ?Equipment
+    {
+        return $this->equipment;
+    }
+
+    public function setEquipment(?Equipment $equipment): static
+    {
+        $this->equipment = $equipment;
+
+        return $this;
+    }
+
+    public function __toString() {
+        return $this->name;
     }
 }

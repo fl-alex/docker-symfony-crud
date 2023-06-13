@@ -20,6 +20,10 @@ class File
     #[ORM\JoinColumn(nullable: false)]
     private ?FileType $FileType = null;
 
+    #[ORM\ManyToOne(inversedBy: 'file')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Equipment $equipment = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +49,18 @@ class File
     public function setFileType(?FileType $FileType): static
     {
         $this->FileType = $FileType;
+
+        return $this;
+    }
+
+    public function getEquipment(): ?Equipment
+    {
+        return $this->equipment;
+    }
+
+    public function setEquipment(?Equipment $equipment): static
+    {
+        $this->equipment = $equipment;
 
         return $this;
     }

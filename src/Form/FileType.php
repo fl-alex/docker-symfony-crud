@@ -6,6 +6,8 @@ use App\Entity\File;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+
 
 class FileType extends AbstractType
 {
@@ -15,6 +17,8 @@ class FileType extends AbstractType
             ->add('name')
             ->add('FileType')
             ->add('equipment')
+            ->add('del', ButtonType::class, [
+                'attr' => ['class' => 'btn_remove']])
         ;
     }
 

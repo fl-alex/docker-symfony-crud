@@ -20,9 +20,11 @@ class EquipmentType extends AbstractType
             ->add('datestart', DateType::class, ['label' => 'Starts On','widget'=>'single_text', 'required'=>true])
             ->add('dateend', DateType::class, ['label' => 'Starts On','widget'=>'single_text', 'required'=>false])
             ->add('file', CollectionType::class, [
+                    'label'=>'Files: ',
                     'entry_type' => FileType::class,
                     'entry_options' => ['label' => 'mylabel'],
-                    'allow_add' => true
+                    'allow_add' => true,
+                    'allow_delete' =>true
                 ])
             ->add('characteristics')
             ->add('ObjectType')

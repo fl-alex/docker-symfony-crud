@@ -52,9 +52,11 @@ class EquipmentController extends AbstractController
     public function edit(Request $request, Equipment $equipment, EquipmentRepository $equipmentRepository): Response
     {
         $form = $this->createForm(EquipmentType::class, $equipment);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $equipmentRepository->save($equipment, true);
 
             return $this->redirectToRoute('app_equipment_index', [], Response::HTTP_SEE_OTHER);

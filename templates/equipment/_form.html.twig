@@ -10,6 +10,7 @@
 <ul class="tags"
     data-index="{{ form.file|length > 0 ? form.file|last.vars.name + 1 : 0 }}"
     data-prototype="{{ form_widget(form.file.vars.prototype)|e('html_attr') }}"
+
 ></ul>
 
 <button type="button" class="add_item_link" data-collection-holder-class="tags">Add a file</button>
@@ -21,6 +22,10 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
+
+    document.querySelectorAll('.btn_remove').forEach(btn => btn.addEventListener("click", function(e){
+      this.parentNode.parentNode.parentNode.remove();
+    }));
 
     const addFormToCollection = (e) => {
       const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);

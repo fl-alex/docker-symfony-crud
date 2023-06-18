@@ -3,16 +3,23 @@
 namespace App\Controller;
 
 use App\Entity\Equipment;
+use App\Entity\File;
 use App\Form\EquipmentType;
 use App\Repository\EquipmentRepository;
+use App\Repository\FileRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use App\Service\FileUploader;
+
 
 #[Route('/equipment')]
 class EquipmentController extends AbstractController
 {
+
     #[Route('/', name: 'app_equipment_index', methods: ['GET'])]
     public function index(EquipmentRepository $equipmentRepository): Response
     {
@@ -49,13 +56,32 @@ class EquipmentController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_equipment_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Equipment $equipment, EquipmentRepository $equipmentRepository): Response
+    public function edit(Request $request, Equipment $equipment, EquipmentRepository $equipmentRepository,
+        SluggerInterface $slugger, FileUploader $fileUploader, EntityManagerInterface $entityManager, FileRepository $fileRepository): Response
     {
         $form = $this->createForm(EquipmentType::class, $equipment);
-
         $form->handleRequest($request);
-
+        $arr_upl=[];
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($request->files->get('equipment')!=null){
+                foreach ($request->files->get('equipment') as $v){
+                    foreach ($v as $val){
+                        $myfile = $val['myfile'];
+                        if (is_file($myfile)){
+                            $arr_upl[] = $fileUploader->upload($myfile);
+                        }
+                    }
+                }
+            }
+
+            $cnt = 0;
+            foreach ($form->getViewData()->getFile() as $k=>$v){
+                if ((string)$k='collection'){
+                    $v->setName($arr_upl[$cnt]);
+                }
+                $cnt++;
+
+            }
 
             $equipmentRepository->save($equipment, true);
 

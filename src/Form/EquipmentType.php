@@ -24,7 +24,7 @@ class EquipmentType extends AbstractType
                     'entry_type' => FileType::class,
                     'entry_options' => ['label' => 'mylabel'],
                     'allow_add' => true,
-                    'allow_delete' =>true
+                    'allow_delete' =>true,
                 ])
             ->add('characteristics')
             ->add('ObjectType')

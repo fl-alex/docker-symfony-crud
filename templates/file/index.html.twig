@@ -14,10 +14,12 @@
             </tr>
         </thead>
         <tbody>
+
         {% for file in files %}
             <tr>
                 <td>{{ file.id }}</td>
-                <td>{{ file.name }}</td>
+                <td><a href="{{ asset('uploads/' ~ file.name) }}">{{ file.name }}</a></td>
+
                 <td>
                     <a href="{{ path('app_file_show', {'id': file.id}) }}">show</a>
                     <a href="{{ path('app_file_edit', {'id': file.id}) }}">edit</a>

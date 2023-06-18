@@ -20,7 +20,7 @@ class FileController extends AbstractController
     public function index(FileRepository $fileRepository): Response
     {
         return $this->render('file/index.html.twig', [
-            'files' => $fileRepository->findAll(),
+            'files' => $fileRepository->findAll(), 'upload_files' => $this->getParameter('upload_files')
         ]);
     }
 

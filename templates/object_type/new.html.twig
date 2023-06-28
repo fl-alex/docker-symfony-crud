@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ObjectType{% endblock %}
+
+{% block body %}
+    <h1>Create new ObjectType</h1>
+
+    {{ include('object_type/_form.html.twig') }}
+
+    <a href="{{ path('app_object_type_index') }}">back to list</a>
+{% endblock %}

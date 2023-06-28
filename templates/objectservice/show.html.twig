@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Objectservice{% endblock %}
+
+{% block body %}
+    <h1>Objectservice</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ objectservice.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ objectservice.name }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ objectservice.description }}</td>
+            </tr>
+            <tr>
+                <th>Dateplan</th>
+                <td>{{ objectservice.dateplan ? objectservice.dateplan|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Datefact</th>
+                <td>{{ objectservice.datefact ? objectservice.datefact|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Dateend</th>
+                <td>{{ objectservice.dateend ? objectservice.dateend|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_objectservice_index') }}">back to list</a>
+
+    <a href="{{ path('app_objectservice_edit', {'id': objectservice.id}) }}">edit</a>
+
+    {{ include('objectservice/_delete_form.html.twig') }}
+{% endblock %}

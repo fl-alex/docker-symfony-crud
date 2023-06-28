@@ -5,6 +5,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+
         {% block stylesheets %}
 
         {% endblock %}
@@ -14,11 +15,104 @@
         {% endblock %}
     </head>
     <body>
-      <ol>
-        <li><a href="{{ path('dashboard') }}">Dashboard</a></li>
-        <li></li>
-        <li></li>
-      </ol>
+
+      <div class="row">
+
+
+        {% if app.user %}
+        <span style="float: right">You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a></span>
+        {% endif %}
+      </div>
+
+      <a href="{{ path('dashboard') }}">Dashboard</a>
+      <a href="{{ path('app_equipment_index') }}">Equipment </a>
+      <div class="dropdown">
+        <button class="dropbtn">References</button>
+        <div class="dropdown-content">
+          <a href="{{ path('app_person_index') }}">Persons</a>
+          <a href="{{ path('app_object_type_index') }}">ObjectTypes</a>
+          <a href="{{ path('app_location_index') }}">ObjectLocations</a>
+          <a href="{{ path('app_file_type_index') }}">FileTypes</a>
+          <a href="{{ path('app_service_type_index') }}">ServiceTypes</a>
+          <a href="{{ path('app_service_state_index') }}">ServiceStates</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Account</button>
+        <div class="dropdown-content">
+          {% if app.user %}
+            <a href="{{ path('app_logout') }}">Logout for {{ app.user.userIdentifier }}</a>
+            {% else %}
+              <span style="color: brown">You not a logged in...</span>
+          {% endif %}
+          <a href="{{ path('app_register') }}">Register user</a>
+
+        </div>
+      </div>
+      <a href="{{ path('app_file_index') }}">Files</a> |
+      <a href="{{ path('app_objectservice_index') }}">Services</a> |
+    <hr>
+
+
+
         {% block body %}{% endblock %}
     </body>
+
+<style>
+  table{
+    border-spacing:0;
+  }
+  td{
+    border: 1px solid gray;
+    padding: 2px 5px 2px 5px;
+  }
+
+
+  /* Кнопка выпадающего списка */
+  .dropbtn {
+    background-color: #17a2b8;
+    color: white;
+    padding: 5px;
+    font-size: 15px;
+    border: none;
+  }
+
+  /* Контейнер <div> - необходим для размещения выпадающего содержимого */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  /* Выпадающее содержимое (скрыто по умолчанию) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #9fcad2;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border: 1px solid darkcyan;
+    z-index: 1;
+  }
+
+  /* Ссылки внутри выпадающего списка */
+  .dropdown-content a {
+    color: black;
+    padding: 5px 8px;
+    text-decoration: none;
+    display: block;
+  }
+
+  /* Изменение цвета выпадающих ссылок при наведении курсора */
+  .dropdown-content a:hover {background-color: #c7e9ef;}
+
+  /* Показать выпадающее меню при наведении курсора */
+  .dropdown:hover .dropdown-content {display: block;}
+
+  /* Изменение цвета фона кнопки раскрывающегося списка при отображении содержимого раскрывающегося списка */
+  .dropdown:hover .dropbtn {background-color: #4397a4;}
+
+    </style>
+
+
+
 </html>

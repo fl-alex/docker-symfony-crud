@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Objectservice{% endblock %}
+
+{% block body %}
+    <h1>Create new Objectservice</h1>
+
+    {{ include('objectservice/_form.html.twig') }}
+
+    <a href="{{ path('app_objectservice_index') }}">back to list</a>
+{% endblock %}

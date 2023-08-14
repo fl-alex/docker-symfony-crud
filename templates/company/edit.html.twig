@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Company{% endblock %}
+
+{% block body %}
+    <h1>Edit Company</h1>
+
+    {{ include('company/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_company_index') }}">back to list</a>
+
+    {{ include('company/_delete_form.html.twig') }}
+
+
+{{ company.id }}
+
+  <form action="{{ path('app_employee_new_from', {'id': company.id}) }}" method="get">
+    <input type="submit" value="Create from this company" />
+  </form>
+
+  <table>
+  {% for empl in employees %}
+    <tr>
+      <td>{{ empl.id }}</td>
+      <td>{{ empl.name }}</td>
+      <td><a href="{{ path('app_employee_edit',{'id': empl.id}) }}">Edit</a> <form action="{{ path('app_employee_delete',{'id': empl.id}) }}">
+          <input type="submit" value="Delete" /></form> </td>
+    </tr>
+  {% endfor %}
+  </table>
+
+{% endblock %}

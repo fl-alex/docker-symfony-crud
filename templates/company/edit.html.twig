@@ -3,7 +3,7 @@
 {% block title %}Edit Company{% endblock %}
 
 {% block body %}
-    <h1>Edit Company</h1>
+    <h1>Edit company: {{ company }}</h1>
 
     {{ include('company/_form.html.twig', {'button_label': 'Update'}) }}
 
@@ -12,19 +12,23 @@
     {{ include('company/_delete_form.html.twig') }}
 
 
-{{ company.id }}
 
+<hr>
+  <h1>List of {{ company }} employees</h1>
   <form action="{{ path('app_employee_new_from', {'id': company.id}) }}" method="get">
-    <input type="submit" value="Create from this company" />
+    <input type="submit" value="Add employee to {{ company }}" />
   </form>
+  <br>
 
   <table>
   {% for empl in employees %}
     <tr>
       <td>{{ empl.id }}</td>
       <td>{{ empl.name }}</td>
-      <td><a href="{{ path('app_employee_edit',{'id': empl.id}) }}">Edit</a> <form action="{{ path('app_employee_delete',{'id': empl.id}) }}">
-          <input type="submit" value="Delete" /></form> </td>
+      <td><span><a href="{{ path('app_employee_edit',{'id': empl.id}) }}">Edit</a>
+          <a href="#" onclick="window.location='{{ path('app_employee_delete',{'id': empl.id}) }}'">Delete</a>
+        </span>
+      </td>
     </tr>
   {% endfor %}
   </table>

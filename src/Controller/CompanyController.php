@@ -14,9 +14,11 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/company')]
 class CompanyController extends AbstractController
 {
+
     #[Route('/', name: 'app_company_index', methods: ['GET'])]
     public function index(CompanyRepository $companyRepository): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         return $this->render('company/index.html.twig', [
             'companies' => $companyRepository->findAll(),
         ]);
@@ -25,6 +27,7 @@ class CompanyController extends AbstractController
     #[Route('/new', name: 'app_company_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $company = new Company();
         $form = $this->createForm(CompanyType::class, $company);
         $form->handleRequest($request);
@@ -45,6 +48,7 @@ class CompanyController extends AbstractController
     #[Route('/{id}', name: 'app_company_show', methods: ['GET'])]
     public function show(Company $company): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         return $this->render('company/show.html.twig', [
             'company' => $company,
         ]);
@@ -53,6 +57,7 @@ class CompanyController extends AbstractController
     #[Route('/{id}/edit', name: 'app_company_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Company $company, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $form = $this->createForm(CompanyType::class, $company);
         $form->handleRequest($request);
 
@@ -72,6 +77,7 @@ class CompanyController extends AbstractController
     #[Route('/{id}', name: 'app_company_delete', methods: ['POST'])]
     public function delete(Request $request, Company $company, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         if ($this->isCsrfTokenValid('delete'.$company->getId(), $request->request->get('_token'))) {
             $entityManager->remove($company);
             $entityManager->flush();

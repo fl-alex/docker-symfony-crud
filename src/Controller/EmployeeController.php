@@ -118,10 +118,12 @@ class EmployeeController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_employee_index', [], Response::HTTP_SEE_OTHER);
+     return $this->redirectToRoute('app_employee_index', [], Response::HTTP_SEE_OTHER);
+
+
     }
 
-    #[Route('/{id}', name: 'app_employee_delete_from', methods: ['POST'])]
+    #[Route('/delfrom/{id}', name: 'app_employee_delete_from', methods: ['GET','POST'])]
     public function delete_from(Request $request, Employee $employee, EntityManagerInterface $entityManager): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -132,4 +134,5 @@ class EmployeeController extends AbstractController
 
         return $this->redirectToRoute('app_company_edit', ['id'=>$employee->getCompany()->getId()], Response::HTTP_SEE_OTHER);
     }
+
 }

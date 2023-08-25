@@ -26,7 +26,7 @@
       <td>{{ empl.id }}</td>
       <td>{{ empl.name }}</td>
       <td><span><a href="{{ path('app_employee_edit',{'id': empl.id}) }}">Edit</a>
-          <a href="#" onclick="window.location='{{ path('app_employee_delete',{'id': empl.id}) }}'">Delete</a>
+          <a href="#" onclick="window.location='{{ path('app_employee_delete_from',{'id': empl.id}) }}'">Delete</a>
         </span>
       </td>
     </tr>

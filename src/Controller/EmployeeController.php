@@ -72,7 +72,7 @@ class EmployeeController extends AbstractController
             $entityManager->persist($employee);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_employee_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_company_edit', ['id'=>$employee->getCompany()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('employee/new.html.twig', [
@@ -119,5 +119,17 @@ class EmployeeController extends AbstractController
         }
 
         return $this->redirectToRoute('app_employee_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}', name: 'app_employee_delete_from', methods: ['POST'])]
+    public function delete_from(Request $request, Employee $employee, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        if ($this->isCsrfTokenValid('delete'.$employee->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($employee);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_company_edit', ['id'=>$employee->getCompany()->getId()], Response::HTTP_SEE_OTHER);
     }
 }

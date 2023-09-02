@@ -15,15 +15,35 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
+use Omines\DataTablesBundle\Adapter\ArrayAdapter;
+use Omines\DataTablesBundle\Column\TextColumn;
+use Omines\DataTablesBundle\DataTableFactory;
+
 #[Route('/employee')]
 class EmployeeController extends AbstractController
 {
-    #[Route('/', name: 'app_employee_index', methods: ['GET'])]
-    public function index(EmployeeRepository $employeeRepository): Response
+    #[Route('/', name: 'app_employee_index', methods: ['GET','POST'])]
+    public function index(EmployeeRepository $employeeRepository, DataTableFactory $dataTableFactory, Request $request): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $table = $dataTableFactory->create()
+            ->add('firstName', TextColumn::class)
+            ->add('lastName', TextColumn::class)
+            ->createAdapter(ArrayAdapter::class, [
+                ['firstName' => 'Donald', 'lastName' => 'Trump'],
+                ['firstName' => 'Barack', 'lastName' => 'Obama'],
+            ])
+            ->handleRequest($request);
+
+        if ($table->isCallback()) {
+            return $table->getResponse();
+        }
+
+
         return $this->render('employee/index.html.twig', [
             'employees' => $employeeRepository->findAll(),
+            'datatable' => $table
         ]);
     }
 

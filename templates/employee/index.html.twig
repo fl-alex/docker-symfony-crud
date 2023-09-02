@@ -32,4 +32,21 @@
     </table>
 
     <a href="{{ path('app_employee_new') }}">Create new</a>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <!-- Insert this where you want the table to appear -->
+  <div id="presidents">Loading...</div>
+
+  <!-- Insert this at the end of your body element, but before the closing tag -->
+  <script src="{{ asset('bundles/datatables/js/datatables.js') }}"></script>
+
+  <script>
+    $(function() {
+      $('#presidents').initDataTables({{ datatable_settings(datatable) }});
+    });
+  </script>
+
+
 {% endblock %}

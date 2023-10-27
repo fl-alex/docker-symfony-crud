@@ -14,6 +14,8 @@ services:
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         ports:
             - 3306:3306
+        container_name:
+            mysql
         networks:
             - symfony_app
     php:
@@ -25,6 +27,8 @@ services:
             - ../:/var/www/symfony:cached
             - symfony_app_var:/var/www/symfony/var
             - symfony_app_vendor:/var/www/symfony/vendor
+        container_name:
+            php
         networks:
             - symfony_app
     nginx:
@@ -36,6 +40,8 @@ services:
             - symfony_app_vendor:/var/www/symfony/vendor
         ports:
             - 80:80
+        container_name:
+            nginx
         networks:
             - symfony_app
         env_file:
@@ -46,6 +52,8 @@ services:
         restart: always
         ports:
             - 8080:80
+        container_name:
+            phphmyadmin
         networks:
             - symfony_app
         environment:
